@@ -1,31 +1,20 @@
 import java.net.*;
-import java.util.Scanner;
+import java.util.*;
 
 public class UDPC {
-    public static void main(String[] args) throws Exception{
-        DatagramSocket skt = null;
-        try {
-            skt = new DatagramSocket();
-            Scanner sc = new Scanner(System.in);
-            System.out.println("Enter the message:");
-            String msg = sc.nextLine();
-            byte[] b = msg.getBytes();
-            InetAddress host = InetAddress.getByName("127.0.0.1");
-            int serverPort = 6788;
-            DatagramPacket request = new DatagramPacket(b, b.length, host, serverPort);
-            skt.send(request);
-            byte[] buffer = new byte[1000];
-            DatagramPacket reply = new DatagramPacket(buffer, buffer.length);
-            skt.receive(reply);
-            String receivedMessage = new String(reply.getData(), 0, reply.getLength());
-            System.out.println("Sent: " + msg);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        } finally {
-            if (skt != null) {
-                skt.close();
-            }
-        }
+    public static void main(String[] args) throws Exception {
+        DatagramSocket socket = new DatagramSocket();
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter message: ");
+        String msg = sc.nextLine();
+        InetAddress host = InetAddress.getByName("127.0.0.1");
+        DatagramPacket req = new DatagramPacket(msg.getBytes(), msg.length(), host, 6788);
+        socket.send(req);
+        System.out.println("Message sent: " + msg);
+        byte[] buf = new byte[1000];
+        DatagramPacket rep = new DatagramPacket(buf, buf.length);
+        socket.receive(rep);
+        String ack = new String(rep.getData(), 0, rep.getLength());
+        System.out.println("Acknowledgement Recieved for: " + ack);
     }
 }
-
