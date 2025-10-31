@@ -1,5 +1,5 @@
 import java.net.*;
-public class UDPS {
+public class Lab5b_UDPS {
     public static void main(String[] args) throws Exception {
         DatagramSocket socket = new DatagramSocket(6788);
         byte[] buf = new byte[1000];
@@ -16,3 +16,4 @@ public class UDPS {
         }
     }
 }
+
