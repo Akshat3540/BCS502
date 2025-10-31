@@ -1,6 +1,6 @@
 import java.net.*;
 import java.util.*;
-public class UDPC {
+public class Lab5a_UDPC {
     public static void main(String[] args) throws Exception {
         DatagramSocket socket = new DatagramSocket();
         Scanner sc = new Scanner(System.in);
@@ -17,4 +17,5 @@ public class UDPC {
         System.out.println("Acknowledgement Recieved for: " + ack);
     }
 }
+
 
