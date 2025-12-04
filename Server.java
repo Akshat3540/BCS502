@@ -16,7 +16,7 @@ public class Server {
 
             System.out.println("Connected to client.");
             if (!"start".equals(in.readUTF())) {
-                out.writeUTF("Invalid request");
+                out.writeUTF("Request not valid");
                 return;
             }
             System.out.println("Recieved 'start' request.");
@@ -26,8 +26,9 @@ public class Server {
                 return;
             }
 
+            out.writeUTF(f.getName());
+            out.writeLong(f.length());
             System.out.print("Sending file: " + f.getName() + "\nFile Size: " + f.length() + "\n");
-            out.writeUTF(f.getName() + "|" + f.length());
 
             Files.copy(f.toPath(), out);
             System.out.println("File Sent successfully.");

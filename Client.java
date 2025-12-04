@@ -16,17 +16,17 @@ class Client {
                 return;
             out.writeUTF("start");
 
-            String meta = in.readUTF();
-            if (meta.startsWith("File") || meta.startsWith("Invalid")) {
-                System.out.println("Server: " + meta);
+            String fname = in.readUTF();
+            if (fname.contains("not")) {
+                System.out.println(fname);
                 return;
             }
 
-            String[] parts = meta.split("\\|");
-            System.out.print("Recieving file: " + parts[0] + "\nSaving as: client_" + parts[0] + "\nFile Size: "
-                    + parts[1] + "\nRecieving file...\n");
+            long size = in.readLong();
+            System.out.print("Recieving file: " + fname + "\nSaving as: client_" + fname + "\nFile Size: " + size
+                    + "\nRecieving file...\n");
 
-            Files.copy(in, Paths.get("client_" + parts[0]), StandardCopyOption.REPLACE_EXISTING);
+            Files.copy(in, Paths.get("client_" + fname));
             System.out.println("File transfer completed.");
         }
         sc.close();
