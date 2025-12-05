@@ -5,8 +5,9 @@ import java.util.*;
 
 public class Server {
     public static void main(String[] args) throws Exception {
+        Scanner sc = new Scanner(System.in);
         System.out.print("Enter the file name: ");
-        File f = new File(new Scanner(System.in).nextLine());
+        File f = new File(sc.nextLine());
 
         System.out.println("Server started. Waiting for client...");
         try (ServerSocket ss = new ServerSocket(5000);
@@ -33,5 +34,6 @@ public class Server {
             Files.copy(f.toPath(), out);
             System.out.println("File Sent successfully.");
         }
+        sc.close();
     }
 }

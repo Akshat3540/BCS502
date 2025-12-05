@@ -12,9 +12,7 @@ class Client {
                 DataOutputStream out = new DataOutputStream(s.getOutputStream())) {
 
             System.out.print("Send 'start' to begin... ");
-            if (!sc.nextLine().equals("start"))
-                return;
-            out.writeUTF("start");
+            out.writeUTF(sc.nextLine());
 
             String fname = in.readUTF();
             if (fname.contains("not")) {
